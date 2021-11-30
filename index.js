@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+const morgan = require('morgan');
 
 dotenv.config();
 
@@ -16,6 +18,11 @@ mongoose.connect(
 );
 
 const app = express();
+
+// middlewares
+app.use(express.json());
+app.use(helmet());
+app.use(morgan('common'));
 
 app.listen(8800, () => {
   console.log('Backend server is running!');
